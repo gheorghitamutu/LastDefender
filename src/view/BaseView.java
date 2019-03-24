@@ -4,11 +4,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Text;
 
-public class BaseView {
+abstract public class BaseView {
     Canvas canvas;
     GraphicsContext gfx;
-    private Group root;
+    Group root;
     private Scene scene;
     private int lifeSpan = 3; // seconds
 
@@ -59,4 +60,11 @@ public class BaseView {
     public void setGfx(GraphicsContext gfx) {
         this.gfx = gfx;
     }
+
+    void centerTextToScene(Text text) {
+        text.layoutXProperty().bind(scene.widthProperty().subtract(text.prefWidth(-1)).divide(2));
+        text.layoutYProperty().bind(scene.heightProperty().subtract(text.prefHeight(-1)).divide(2));
+    }
+
+    abstract public void Draw();
 }

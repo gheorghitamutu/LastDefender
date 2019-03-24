@@ -2,13 +2,13 @@
 2D game using JavaFX
 
 ## Resources:
-### Sprite 
+### Sprites 
 https://opengameart.org/content/space-shooter-redux
-### Background    
+### Backgrounds  
 https://opengameart.org/content/space-shooter-redux
 ### SFX
 https://opengameart.org/content/space-shooter-redux
-### Font
+### Fonts
 https://opengameart.org/content/space-shooter-redux    
 ### Songs
 https://dos88.itch.io/dos-88-music-library

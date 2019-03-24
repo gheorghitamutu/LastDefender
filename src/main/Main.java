@@ -5,7 +5,8 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import view.TestView;
+import view.MainMenu;
+import view.Splash;
 
 public class Main extends Application {
 
@@ -13,11 +14,13 @@ public class Main extends Application {
         launch(args);
     }
 
+    private Splash tv = new Splash(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+    private MainMenu mm = new MainMenu(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle(Config.GAME_TITLE);
 
-        TestView tv = new TestView(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         tv.Draw();
         primaryStage.setScene(tv.getScene());
 
@@ -31,9 +34,12 @@ public class Main extends Application {
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 double delta = (currentNanoTime - startNanoTime) / 1000000000.0;
-                if (delta > tv.getLifeSpan())
-                    primaryStage.close();
-                tv.Draw();
+                if (delta < tv.getLifeSpan()) {
+                    tv.Draw();
+                } else {
+                    primaryStage.setScene(mm.getScene());
+                    mm.Draw();
+                }
             }
         }.start();
 
