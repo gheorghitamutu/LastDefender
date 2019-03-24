@@ -5,8 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import view.MainMenu;
-import view.Splash;
+import state.SplashState;
 
 public class Main extends Application {
 
@@ -14,35 +13,36 @@ public class Main extends Application {
         launch(args);
     }
 
-    private Splash tv = new Splash(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-    private MainMenu mm = new MainMenu(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+    private SplashState splashState = new SplashState();
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle(Config.GAME_TITLE);
-
-        tv.Draw();
-        primaryStage.setScene(tv.getScene());
 
         primaryStage.setOnCloseRequest(t -> {
             Platform.exit();
             System.exit(0);
         });
 
-        final long startNanoTime = System.nanoTime();
+        new Thread(() -> {
+            while (true) {
+                splashState.update();
+            }
+        }).start();
 
         new AnimationTimer() {
+            final long startNanoTime = System.nanoTime();
+            double delta = 0;
             public void handle(long currentNanoTime) {
-                double delta = (currentNanoTime - startNanoTime) / 1000000000.0;
-                if (delta < tv.getLifeSpan()) {
-                    tv.Draw();
-                } else {
-                    primaryStage.setScene(mm.getScene());
-                    mm.Draw();
+                delta += (currentNanoTime - startNanoTime) / 1000000000.0;
+                if (delta > 0.16) {
+                    splashState.draw();
+                    delta -= 0.16;
                 }
             }
         }.start();
 
+        primaryStage.setScene(splashState.getScene());
         primaryStage.show();
     }
 }

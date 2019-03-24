@@ -13,7 +13,7 @@ public class Splash extends BaseView {
     }
 
     @Override
-    public void Draw() {
+    public void draw() {
         gfx.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         Text splashMessage = new Text(Config.GAME_TITLE);

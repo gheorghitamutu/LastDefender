@@ -12,7 +12,7 @@ public class MainMenu extends BaseView {
     }
 
     @Override
-    public void Draw() {
+    public void draw() {
         gfx.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         Text startGame = new Text(Config.MAIN_MENU_START_GAME);

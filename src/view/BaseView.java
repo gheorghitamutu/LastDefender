@@ -66,5 +66,5 @@ abstract public class BaseView {
         text.layoutYProperty().bind(scene.heightProperty().subtract(text.prefHeight(-1)).divide(2));
     }
 
-    abstract public void Draw();
+    abstract public void draw();
 }
