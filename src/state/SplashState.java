@@ -8,7 +8,8 @@ import view.Splash;
 public class SplashState implements BaseState {
     private final long startNanoTime = System.nanoTime();
     private Splash splashView = new Splash(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-    private long delta = 0;
+    private double delta = 0;
+    private boolean isRunning = true;
 
     @Override
     public void handle_input() {
@@ -17,8 +18,9 @@ public class SplashState implements BaseState {
 
     @Override
     public void update() {
-        delta += (System.nanoTime() - startNanoTime) / 1000000000.0;
+        delta = (System.nanoTime() - startNanoTime) / 1000000000.0;
         if (delta > splashView.getLifeSpan()) {
+            setIsRunning(false);
             Platform.exit();
         } else {
             handle_input(); // controller to switch state
@@ -47,5 +49,13 @@ public class SplashState implements BaseState {
 
     public Scene getScene() {
         return splashView.getScene();
+    }
+
+    public synchronized boolean getIsRunning() {
+        return isRunning;
+    }
+
+    private synchronized void setIsRunning(boolean isRunning) {
+        this.isRunning = isRunning;
     }
 }

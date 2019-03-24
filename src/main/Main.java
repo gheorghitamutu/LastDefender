@@ -25,7 +25,7 @@ public class Main extends Application {
         });
 
         new Thread(() -> {
-            while (true) {
+            while (splashState.getIsRunning()) {
                 splashState.update();
             }
         }).start();
