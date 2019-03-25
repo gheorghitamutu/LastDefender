@@ -1,6 +1,5 @@
 package view;
 
-import config.Config;
 import game.GameData;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -8,13 +7,14 @@ import manager.ResourceManager;
 
 public class Splash extends BaseView {
 
-    private Text splashMessage;
+    private String message;
     private GameData data;
 
-    public Splash(GameData data) {
+    public Splash(GameData data, String message) {
         super(data);
         data.getResourceManager().LoadResourcesFor(ResourceManager.Purpose.Splash);
         this.data = data;
+        this.message = message;
     }
 
     @Override
@@ -28,11 +28,26 @@ public class Splash extends BaseView {
         data.setGfx(canvas.getGraphicsContext2D());
         data.replaceRootCanvas(canvas);
 
-        splashMessage = new Text(Config.GAME_TITLE);
-        splashMessage.setFont(ResourceManager.getInstance().getFont(ResourceManager.CustomFont.Ken));
-        splashMessage.setFill(Color.RED);
-        splashMessage.setStroke(Color.BLACK);
-        centerTextToScene(splashMessage);
-        root.getChildren().add(splashMessage);
+        Text splashText = new Text(message);
+        splashText.setFont(ResourceManager.getInstance().getFont(ResourceManager.CustomFont.Ken));
+        splashText.setFill(Color.RED);
+        splashText.setStroke(Color.BLACK);
+        centerTextToScene(splashText);
+        root.getChildren().add(splashText);
+    }
+
+    @Override
+    public void IncrementIndex() {
+        // nothing
+    }
+
+    @Override
+    public void DecrementIndex() {
+        // nothing
+    }
+
+    @Override
+    public void ExecuteCurrentOption() {
+
     }
 }

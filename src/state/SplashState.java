@@ -1,6 +1,7 @@
 package state;
 
 import game.GameData;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import view.Splash;
 
@@ -8,11 +9,13 @@ public class SplashState implements BaseState {
     private final GameData data;
     private long startNanoTime = 0;
     private Splash splashView;
+    private final boolean quitGameSplash;
 
-    public SplashState(GameData data) {
+    public SplashState(GameData data, String message, boolean quitGameSplash) {
         super();
         this.data = data;
-        splashView = new Splash(this.data);
+        splashView = new Splash(this.data, message);
+        this.quitGameSplash = quitGameSplash;
     }
 
     @Override
@@ -24,6 +27,9 @@ public class SplashState implements BaseState {
     public void Update() {
         double delta = (System.nanoTime() - startNanoTime) / 1000000000.0;
         if (delta > splashView.getLifeSpan()) {
+            if (quitGameSplash) {
+                Platform.exit();
+            }
             data.getStateMachine().AddState(new MainMenuState(data), true);
         }
     }

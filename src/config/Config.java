@@ -8,4 +8,8 @@ public class Config {
     public static final String MAIN_FONT_PATH = "resources\\font\\kenvector_future.ttf";
 
     public static final String MAIN_MENU_START_GAME = "START GAME";
+    public static final String OPTIONS = "OPTIONS";
+    public static final String QUIT = "QUIT";
+
+    public static final String QUIT_GAME = "THANK YOU!";
 }

@@ -69,4 +69,10 @@ abstract public class BaseView {
     abstract public void Draw();
 
     abstract public void Init();
+
+    abstract public void IncrementIndex();
+
+    abstract public void DecrementIndex();
+
+    public abstract void ExecuteCurrentOption();
 }

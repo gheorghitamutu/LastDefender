@@ -1,17 +1,21 @@
 package state;
 
+import controller.MainMenuController;
 import game.GameData;
 import javafx.scene.Scene;
 import view.MainMenu;
 
 public class MainMenuState implements BaseState {
+
     private final GameData data;
-    private MainMenu mainMenu;
+    private final MainMenu mainMenu;
+    private final MainMenuController mainMenuController;
 
     MainMenuState(GameData data) {
         super();
         this.data = data;
         mainMenu = new MainMenu(this.data);
+        mainMenuController = new MainMenuController(mainMenu);
     }
 
     @Override
@@ -32,6 +36,7 @@ public class MainMenuState implements BaseState {
     @Override
     public void init() {
         mainMenu.Init();
+        mainMenuController.AddListeners();
     }
 
     @Override

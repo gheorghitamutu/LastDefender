@@ -14,7 +14,7 @@ public class Game extends Application {
 
     public Game() {
         super();
-        data.getStateMachine().AddState(new SplashState(data), true);
+        data.getStateMachine().AddState(new SplashState(data, Config.GAME_TITLE, false), true);
     }
 
     @Override
