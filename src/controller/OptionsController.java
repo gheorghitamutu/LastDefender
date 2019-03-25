@@ -4,11 +4,12 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import view.BaseView;
 
-public class MainMenuController extends BaseController {
-    private BaseView view;
-    private final EventHandler<KeyEvent> keyPressedEvent;
+public class OptionsController extends BaseController {
 
-    public MainMenuController(BaseView view) {
+    private final EventHandler<KeyEvent> keyPressedEvent;
+    private BaseView view;
+
+    public OptionsController(BaseView view) {
         this.view = view;
 
         keyPressedEvent = keyEvent -> {

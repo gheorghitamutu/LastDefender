@@ -41,6 +41,7 @@ public class MainMenuState implements BaseState {
 
     @Override
     public void pause() {
+        mainMenuController.RemoveListeners();
     }
 
     @Override
@@ -48,6 +49,8 @@ public class MainMenuState implements BaseState {
         data.setCanvas(mainMenu.getCanvas());
         data.setGfx(mainMenu.getCanvas().getGraphicsContext2D());
         data.replaceRootCanvas(mainMenu.getCanvas());
+        mainMenuController.AddListeners();
+        mainMenu.AddRootChildren();
     }
 
     @Override

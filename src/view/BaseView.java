@@ -75,4 +75,6 @@ abstract public class BaseView {
     abstract public void DecrementIndex();
 
     public abstract void ExecuteCurrentOption();
+
+    public abstract void AddRootChildren();
 }

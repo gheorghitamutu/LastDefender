@@ -19,16 +19,19 @@ public class StateMachine {
         this.isReplacing = isReplacing;
     }
 
-    void RemoveState() {
+    public void RemoveState() {
         isRemoving = true;
     }
 
     public void ProcessStateChanges() {
         if (isRemoving && !states.empty()) {
+            states.peek().pause();
             states.pop();
+            System.out.println("states.pop();");
 
             if (!states.empty()) {
                 states.peek().resume();
+                System.out.println("states.peek().resume();");
             }
 
             isRemoving = false;
@@ -39,8 +42,10 @@ public class StateMachine {
                 if (isReplacing) {
                     states.peek().pause();
                     states.pop();
+                    System.out.println("states.peek().pause();states.pop();");
                 } else {
                     states.peek().pause();
+                    System.out.println("states.peek().pause();");
                 }
             }
 

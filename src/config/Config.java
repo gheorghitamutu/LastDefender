@@ -12,4 +12,9 @@ public class Config {
     public static final String QUIT = "QUIT";
 
     public static final String QUIT_GAME = "THANK YOU!";
+
+    public static final String SOUND_ON = "SOUND ON";
+    public static final String SOUND_OFF = "SOUND OFF";
+    public static final String BACK = "BACK";
+
 }

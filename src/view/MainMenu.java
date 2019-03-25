@@ -5,6 +5,7 @@ import game.GameData;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import manager.ResourceManager;
+import state.OptionsState;
 import state.SplashState;
 
 import java.util.ArrayList;
@@ -14,9 +15,9 @@ public class MainMenu extends BaseView {
     private final Color textFill = Color.RED;
     private final Color textStroke = Color.BLACK;
     private final Color textSelectedFill = Color.GREEN;
-    private int selectedOption = 0;
-    private int maxIndex = 3;
-    private ArrayList<Text> optionsList = new ArrayList<>();
+    int selectedOption = 0;
+    int maxIndex = 3;
+    ArrayList<Text> optionsList = new ArrayList<>();
 
     public MainMenu(GameData data) {
         super(data);
@@ -48,7 +49,7 @@ public class MainMenu extends BaseView {
         AddMenuOption(quit, 250);
     }
 
-    private void AddMenuOption(Text text, int offsetYFromCenter) {
+    void AddMenuOption(Text text, int offsetYFromCenter) {
         optionsList.add(text);
         text.setFill(textFill);
         text.setStroke(textStroke);
@@ -81,10 +82,16 @@ public class MainMenu extends BaseView {
                 System.out.println("Start new game!");
                 break;
             case 1:
-                System.out.println("Options");
+                data.getStateMachine().AddState(new OptionsState(data), false);
                 break;
             case 2:
                 data.getStateMachine().AddState(new SplashState(data, Config.QUIT_GAME, true), true);
+                break;
         }
+    }
+
+    @Override
+    public void AddRootChildren() {
+        optionsList.forEach(text -> root.getChildren().add(text));
     }
 }

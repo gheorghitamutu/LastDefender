@@ -37,6 +37,10 @@ public class ResourceManager {
                 }
                 break;
             case OptionsMenu:
+                if (fonts != null) {
+                    fonts.clear();
+                    fonts.put(CustomFont.Ken, loadFont(fontPaths.get(CustomFont.Ken), 48));
+                }
                 break;
             case LoadingScreen:
                 break;

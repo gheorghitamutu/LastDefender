@@ -16,7 +16,7 @@ public class GameData {
     private Group root = new Group();
     private Scene scene;
     private ResourceManager resourceManager = ResourceManager.getInstance();
-    // input manager??
+    private boolean soundOn = true;
 
     GameData() {
         root.getChildren().add(canvas);

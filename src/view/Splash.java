@@ -9,6 +9,7 @@ public class Splash extends BaseView {
 
     private String message;
     private GameData data;
+    private Text splashText;
 
     public Splash(GameData data, String message) {
         super(data);
@@ -28,7 +29,7 @@ public class Splash extends BaseView {
         data.setGfx(canvas.getGraphicsContext2D());
         data.replaceRootCanvas(canvas);
 
-        Text splashText = new Text(message);
+        splashText = new Text(message);
         splashText.setFont(ResourceManager.getInstance().getFont(ResourceManager.CustomFont.Ken));
         splashText.setFill(Color.RED);
         splashText.setStroke(Color.BLACK);
@@ -49,5 +50,10 @@ public class Splash extends BaseView {
     @Override
     public void ExecuteCurrentOption() {
 
+    }
+
+    @Override
+    public void AddRootChildren() {
+        root.getChildren().add(splashText);
     }
 }

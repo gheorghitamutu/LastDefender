@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import state.SplashState;
 
 public class Game extends Application {
-    private final int maxFPS = 60;
     private final double deltaTime = 0.16;
     private GameData data = new GameData();
 
@@ -34,8 +33,8 @@ public class Game extends Application {
                 data.getStateMachine().ProcessStateChanges();
 
                 double delta = (currentNanoTime - currentTime) / 1000000000.0;
-                if (delta > 0.16) {
-                    delta = 0.16;
+                if (delta > deltaTime) {
+                    delta = deltaTime;
                 }
 
                 currentTime = currentNanoTime;
@@ -55,7 +54,6 @@ public class Game extends Application {
         primaryStage.setScene(data.getStateMachine().getActiveState().GetScene());
         primaryStage.show();
     }
-    // clock?
 
     public void Run(String[] args) {
         launch(args);
