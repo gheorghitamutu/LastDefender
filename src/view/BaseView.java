@@ -1,5 +1,6 @@
 package view;
 
+import game.GameData;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,12 +14,11 @@ abstract public class BaseView {
     private Scene scene;
     private int lifeSpan = 3; // seconds
 
-    BaseView(double width, double height) {
-        canvas = new Canvas(width, height);
-        root = new Group();
-        root.getChildren().add(canvas);
-        scene = new Scene(root);
-        gfx = canvas.getGraphicsContext2D();
+    BaseView(GameData data) {
+        canvas = data.getCanvas();
+        gfx = data.getGfx();
+        root = data.getRoot();
+        scene = data.getScene();
     }
 
     public int getLifeSpan() {
@@ -66,5 +66,7 @@ abstract public class BaseView {
         text.layoutYProperty().bind(scene.heightProperty().subtract(text.prefHeight(-1)).divide(2));
     }
 
-    abstract public void draw();
+    abstract public void Draw();
+
+    abstract public void Init();
 }

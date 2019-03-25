@@ -1,40 +1,42 @@
 package state;
 
-import config.Config;
-import javafx.application.Platform;
+import game.GameData;
 import javafx.scene.Scene;
 import view.Splash;
 
 public class SplashState implements BaseState {
-    private final long startNanoTime = System.nanoTime();
-    private Splash splashView = new Splash(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-    private double delta = 0;
-    private boolean isRunning = true;
+    private final GameData data;
+    private long startNanoTime = 0;
+    private Splash splashView;
+
+    public SplashState(GameData data) {
+        super();
+        this.data = data;
+        splashView = new Splash(this.data);
+    }
 
     @Override
-    public void handle_input() {
+    public void HandleInput() {
         // implement controller
     }
 
     @Override
-    public void update() {
-        delta = (System.nanoTime() - startNanoTime) / 1000000000.0;
+    public void Update() {
+        double delta = (System.nanoTime() - startNanoTime) / 1000000000.0;
         if (delta > splashView.getLifeSpan()) {
-            setIsRunning(false);
-            Platform.exit();
-        } else {
-            handle_input(); // controller to switch state
+            data.getStateMachine().AddState(new MainMenuState(data), true);
         }
     }
 
     @Override
-    public void draw() {
-        splashView.draw();
+    public void Draw() {
+        splashView.Draw();
     }
 
     @Override
     public void init() {
-        // nothing to initialize
+        startNanoTime = System.nanoTime();
+        splashView.Init();
     }
 
     @Override
@@ -44,18 +46,13 @@ public class SplashState implements BaseState {
 
     @Override
     public void resume() {
-        // no resume on this state
+        data.setCanvas(splashView.getCanvas());
+        data.setGfx(splashView.getCanvas().getGraphicsContext2D());
+        data.replaceRootCanvas(splashView.getCanvas());
     }
 
-    public Scene getScene() {
+    @Override
+    public Scene GetScene() {
         return splashView.getScene();
-    }
-
-    public synchronized boolean getIsRunning() {
-        return isRunning;
-    }
-
-    private synchronized void setIsRunning(boolean isRunning) {
-        this.isRunning = isRunning;
     }
 }

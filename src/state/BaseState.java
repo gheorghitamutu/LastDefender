@@ -1,15 +1,19 @@
 package state;
 
+import javafx.scene.Scene;
+
 public interface BaseState {
-    void handle_input();
+    void HandleInput();
 
-    void update();
+    void Update();
 
-    void draw();
+    void Draw();
 
     void init();
 
     void pause();
 
     void resume();
+
+    Scene GetScene();
 }
