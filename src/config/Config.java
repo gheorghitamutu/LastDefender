@@ -17,4 +17,8 @@ public class Config {
     public static final String SOUND_OFF = "SOUND OFF";
     public static final String BACK = "BACK";
 
+    public static final String SFXLASER01 = "resources\\sfx\\sfx_laser1.mp3";
+
+    public static final String SONG_BILLY = "resources\\music\\songs\\Billy\'s Sacrifice .mp3";
+
 }

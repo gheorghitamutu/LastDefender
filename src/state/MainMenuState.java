@@ -3,6 +3,7 @@ package state;
 import controller.MainMenuController;
 import game.GameData;
 import javafx.scene.Scene;
+import manager.ResourceManager;
 import view.MainMenu;
 
 public class MainMenuState implements BaseState {
@@ -37,11 +38,13 @@ public class MainMenuState implements BaseState {
     public void init() {
         mainMenu.Init();
         mainMenuController.AddListeners();
+        data.getResourceManager().playMedia(ResourceManager.CustomMedia.MenuSong01);
     }
 
     @Override
     public void pause() {
         mainMenuController.RemoveListeners();
+        data.getResourceManager().pauseMedia();
     }
 
     @Override
@@ -51,6 +54,7 @@ public class MainMenuState implements BaseState {
         data.replaceRootCanvas(mainMenu.getCanvas());
         mainMenuController.AddListeners();
         mainMenu.AddRootChildren();
+        data.getResourceManager().resumeMedia();
     }
 
     @Override
